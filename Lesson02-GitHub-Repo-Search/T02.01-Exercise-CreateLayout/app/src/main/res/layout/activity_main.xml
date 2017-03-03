@@ -25,27 +25,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--TODO (7) Add an EditText-->
-    <!--TODO (8) Give the EditText an id of @+id/et_search_box-->
-    <!--TODO (9) Set the text size to 22sp-->
-    <!--TODO (10) Set the width to match_parent and the height to wrap_content-->
-    <!--TODO (11) Provide a hint telling the user to enter a query and then click search-->
+    <EditText
+        android:id="@+id/et_search_box"
+        android:hint="Enter a query to search GitHub!"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <!--TODO (12) Add a TextView-->
-    <!--TODO (13) Give the TextView an id of @+id/tv_url_display-->
-    <!--TODO (14) Set the text size to 22sp-->
-    <!--TODO (15) Set the width to wrap_content and the height to wrap_content-->
-    <!--TODO (16) Give the TextView a top margin of 8dp-->
-    <!--TODO (17) Set the text to tell the user their search URL will show up here when they click search-->
+    <TextView
+        android:id="@+id/tv_url_display"
+        android:text="URL appear here when you search!"
+        android:textSize="22sp"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-    <!--TODO (18) Add a ScrollView-->
-    <!--TODO (19) Set the width to match_parent and the height to wrap_content-->
-    <!--TODO (20) Set the top margin to 16dp-->
+    <ScrollView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!--TODO (21) Within the ScrollView, add a TextView-->
-    <!--TODO (22) Give the TextView an id of @+id/tv_github_search_results_json-->
-    <!--TODO (23) Set the text size to 18sp-->
-    <!--TODO (24) Set the height and width to wrap_content-->
-    <!--TODO (25) Set the text to something that tells the user to make a search-->
+        <TextView
+            android:id="@+id/tv_github_search_results_json"
+            android:text="Make a search!!!"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
+    </ScrollView>
 </LinearLayout>
