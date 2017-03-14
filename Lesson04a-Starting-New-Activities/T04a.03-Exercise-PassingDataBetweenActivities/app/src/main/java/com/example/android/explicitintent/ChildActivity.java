@@ -15,6 +15,7 @@
  */
 package com.example.android.explicitintent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -39,5 +40,11 @@ public class ChildActivity extends AppCompatActivity {
             // TODO (5) If the Intent contains the correct extra, retrieve the text
 
             // TODO (6) If the Intent contains the correct extra, use it to set the TextView text
+
+        Intent startedIntent = getIntent();
+        if(startedIntent.hasExtra(Intent.EXTRA_TEXT)){
+            String enteredText = startedIntent.getStringExtra(Intent.EXTRA_TEXT);
+            mDisplayText.setText(enteredText);
+        }
     }
 }
