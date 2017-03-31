@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.udacity.example.droidtermsprovider.DroidTermsExampleContract;
 
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentState;
 
     private Button mButton;
+    private TextView wordTextView;
+    private TextView definitionTextView;
 
     // This state is when the word definition is hidden and clicking the button will therefore
     // show the definition
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the views
         // TODO (1) You'll probably want more than just the Button
+        wordTextView = (TextView) findViewById(R.id.text_view_word);
+        definitionTextView = (TextView) findViewById(R.id.text_view_definition);
         mButton = (Button) findViewById(R.id.button_next);
 
         //Run the database operation to get the cursor off of the main thread
@@ -92,6 +97,20 @@ public class MainActivity extends AppCompatActivity {
         // If you reach the end of the list of words, you should start at the beginning again.
         mCurrentState = STATE_HIDDEN;
 
+        if(mData != null){
+            if(!mData.moveToNext()) {
+                mData.moveToFirst();
+            }
+
+            // Hide the definition TextView
+            definitionTextView.setVisibility(View.INVISIBLE);
+
+            // Change button text
+            mButton.setText(getString(R.string.show_definition));
+            wordTextView.setText(mData.getString(DroidTermsExampleContract.COLUMN_INDEX_WORD));
+            definitionTextView.setText(mData.getString(DroidTermsExampleContract.COLUMN_INDEX_DEFINITION));
+        }
+
     }
 
     public void showDefinition() {
@@ -102,12 +121,19 @@ public class MainActivity extends AppCompatActivity {
         // TODO (4) Show the definition
         mCurrentState = STATE_SHOWN;
 
+        // Hide the definition TextView
+        definitionTextView.setVisibility(View.VISIBLE);
+
+        // Change button text
+        mButton.setText(getString(R.string.next_word));
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // TODO (5) Remember to close your cursor!
+        mData.close();
     }
 
     // Use an async task to do the data fetch off of the main thread.
@@ -138,6 +164,18 @@ public class MainActivity extends AppCompatActivity {
 
             // TODO (2) Initialize anything that you need the cursor for, such as setting up
             // the screen with the first word and setting any other instance variables
+            mData.moveToFirst();
+
+            mCurrentState = STATE_HIDDEN;
+
+            // Hide the definition TextView
+            definitionTextView.setVisibility(View.INVISIBLE);
+
+            // Change button text
+            mButton.setText(getString(R.string.show_definition));
+
+            wordTextView.setText(mData.getString(DroidTermsExampleContract.COLUMN_INDEX_WORD));
+            definitionTextView.setText(mData.getString(DroidTermsExampleContract.COLUMN_INDEX_DEFINITION));
         }
     }
 
