@@ -68,6 +68,22 @@ public class MainActivity extends AppCompatActivity {
         // TODO (10) call swapCursor on mAdapter passing in getAllGuests() as the argument
 
         //TODO (11) attach the ItemTouchHelper to the waitlistRecyclerView
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                long id = (long) viewHolder.itemView.getTag();
+
+                removeGuest(id);
+
+                mAdapter.swapCursor(getAllGuests());
+            }
+        }).attachToRecyclerView(waitlistRecyclerView);
 
     }
 
@@ -139,6 +155,16 @@ public class MainActivity extends AppCompatActivity {
     // TODO (1) Create a new function called removeGuest that takes long id as input and returns a boolean
 
     // TODO (2) Inside, call mDb.delete to pass in the TABLE_NAME and the condition that WaitlistEntry._ID equals id
+
+    private boolean removeGuest(long id){
+        int rows = mDb.delete(WaitlistContract.WaitlistEntry.TABLE_NAME,
+                WaitlistContract.WaitlistEntry._ID + " = " + id, null);
+        if (rows > 0 ){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }
