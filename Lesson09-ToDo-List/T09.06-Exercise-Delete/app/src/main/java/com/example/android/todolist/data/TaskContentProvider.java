@@ -163,8 +163,10 @@ public class TaskContentProvider extends ContentProvider {
         int numOfDeletions; // URI to be returned
 
         switch (match) {
-            case TASKS:
-                numOfDeletions = db.delete(TaskContract.TaskEntry.TABLE_NAME, selection, selectionArgs);
+            case TASK_WITH_ID:
+                String id = uri.getPathSegments().get(1);
+
+                numOfDeletions = db.delete(TaskContract.TaskEntry.TABLE_NAME, "id=?", new String[]{id});
                 break;
             // Set the value for the returnedUri and write the default case for unknown URI's
             // Default case throws an UnsupportedOperationException
