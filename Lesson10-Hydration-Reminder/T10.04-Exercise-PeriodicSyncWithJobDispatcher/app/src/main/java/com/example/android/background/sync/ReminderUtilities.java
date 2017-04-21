@@ -37,7 +37,7 @@ public class ReminderUtilities {
     //  - REMINDER_JOB_TAG should be a String constant, storing something like "hydration_reminder_tag"
     //  - sInitialized should be a private static boolean variable which will store whether the job
     //    has been activated or not
-    private static final int REMINDER_INTERVAL_MINUTES = 15;
+    private static final int REMINDER_INTERVAL_MINUTES = 1;
     private static final int REMINDER_INTERVAL_SECONDS = (int) (TimeUnit.MINUTES.toSeconds(REMINDER_INTERVAL_MINUTES));
     private static final int SYNC_FLEXTIME_SECONDS = REMINDER_INTERVAL_SECONDS;
 
