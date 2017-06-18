@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.boardingpass.databinding.ActivityMainBinding;
+import com.example.android.boardingpass.databinding.FlightInfoBinding;
 import com.example.android.boardingpass.utilities.FakeDataUtils;
 
 import java.text.SimpleDateFormat;
